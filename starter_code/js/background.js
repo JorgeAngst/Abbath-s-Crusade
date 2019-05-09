@@ -2,7 +2,7 @@ class Background {
   constructor(width, height, ctx) {
     this.ctx = ctx;
     this.img = new Image();
-    this.img.src = "img/cga_background_winter.png";
+    this.img.src = "starter_code/img/cga_background_winter.png";
     this.width = width;
     this.height = height;
 

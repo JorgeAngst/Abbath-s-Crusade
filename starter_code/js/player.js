@@ -6,7 +6,9 @@ class Player {
     this.keys = keys;
     this.x = this.canvasWidth * 0.08;
     this.y0 = this.canvasHeight * 0.5;
-    this.enemy = game.enemy;
+    this.life = 1000;
+    this.game = game;
+    this.attacking = false;
 
     // Posición original en el suelo
     this.y = this.y0;
@@ -14,9 +16,7 @@ class Player {
 
     // Imagen player
     this.img = new Image();
-    this.img.src = "img/vikingWalk.png";
-
-    // Imagen attack
+    this.img.src = "starter_code/img/vikingWalk.png";
 
     //Número de imagenes para la animación
     this.img.frames = 9;
@@ -25,8 +25,6 @@ class Player {
     // Medidas de la imagen en window
     this.width = 150;
     this.height = 200;
-
-    // this.setListeners();
   }
 
   draw(framesCounter) {
@@ -49,14 +47,24 @@ class Player {
   setListeners() {
     document.onkeydown = event => {
       if (event.keyCode === this.keys.TOP_KEY) {
-        this.img.src = "img/vikingJump.png";
+        this.img.src = "starter_code/img/vikingJump.png";
         this.height += 100;
         this.width += 100;
         this.y -= 5;
         this.vy -= 10;
-      } else if (event.keyCode == this.keys.SPACE) {
+      }
+
+      if (event.keyCode == this.keys.SPACE) {
+        this.img.src = "starter_code/img/vikingAttack.png";
+        this.attacking = true;
+        setTimeout(() => (this.attacking = false), 1000);
         this.attack();
       }
+
+      // if (event.keyCode == this.keys.RIGHT_KEY) {
+      //   this.img.src = "starter_code/img/vikingRun.png";
+      //   console.log("run");
+      // }
     };
   }
 
@@ -71,18 +79,23 @@ class Player {
   }
 
   attack() {
-    //this.img.src = "img/vikingAttack.png";
-    // this.enemy.life -= 100;
+    if (
+      this.game.enemies[0] &&
+      (this.game.enemies[0].x - (this.x + this.width) < 200)
+    ) {
+      this.game.enemies[0].life -= 100;
+      console.log(this.game.enemy.life);
+    }
   }
 
   move() {
-    var gravity = 1;
+    var gravity = 0.4;
 
     if (this.y >= this.y0) {
-      this.img.src = "img/vikingWalk.png";
+      if (!this.attacking) this.img.src = "starter_code/img/vikingWalk.png";
       this.width = 150;
       this.height = 200;
-      this.velY = -20;
+      this.velY = -17;
       this.y = this.y0;
     } else {
       this.velY += gravity;
