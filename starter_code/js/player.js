@@ -56,6 +56,9 @@ class Player {
 
       if (event.keyCode == this.keys.SPACE) {
         this.img.src = "starter_code/img/vikingAttack.png";
+        this.hitSound = new Audio()
+        this.hitSound.src = "starter_code/Audio/Body-Hit-08.mp3"
+        this.hitSound.play()
         this.attacking = true;
         setTimeout(() => (this.attacking = false), 1000);
         this.attack();

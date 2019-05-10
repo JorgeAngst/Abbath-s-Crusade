@@ -14,13 +14,18 @@ const Game = {
   score: 0,
 
   init: function (id) {
+
+    this.winSound = new Audio()
+    this.winSound.src = "starter_code/Audio/Yeah.mp3"
     this.canvas = document.getElementById(id);
     this.ctx = this.canvas.getContext("2d");
     this.start();
   },
 
   start: function () {
-
+    this.windSound = new Audio()
+    this.windSound.src = "starter_code/Audio/NFF-wind-gust-2.mp3"
+    this.windSound.play()
     this.reset();
 
     this.interval = setInterval(() => {
@@ -32,12 +37,17 @@ const Game = {
         this.framesCounter = 0;
       }
 
+      if (this.windSound.ended) {
+        this.windSound.currentTime = 0
+        this.windSound.play()
+      }
+
       this.moveAll();
       this.drawAll();
-      this.win()
       this.gameOver()
+      this.win()
 
-      if (this.framesCounter % 500 === 0) {
+      if (this.framesCounter % 300 === 0) {
         this.generateEnemy();
       }
 
@@ -51,7 +61,7 @@ const Game = {
   },
 
   reset: function () {
-
+    this.score = 0
     this.background = new Background(
       this.canvas.width,
       this.canvas.height,
@@ -64,11 +74,11 @@ const Game = {
       this.keys,
       this
     );
-    this.deadEnemy = new deadEnemy(
-      this.canvas.width,
-      this.canvas.height,
-      this.ctx
-    );
+    // this.deadEnemy = new deadEnemy(
+    //   this.canvas.width,
+    //   this.canvas.height,
+    //   this.ctx
+    // );
     this.life = new Life(
       this.canvas.width,
       this.canvas.height,
@@ -84,8 +94,6 @@ const Game = {
     )
 
     this.enemies = [];
-
-    this.win
 
     this.framesCounter = 0;
   },
@@ -103,7 +111,8 @@ const Game = {
     }
   },
   win: function () {
-    if (this.score >= 100) {
+    if (this.score >= 1000) {
+      this.winSound.play()
       this.stop()
       confirm("You win motherfucker! Wanna try again bitch?")
       this.reset();
@@ -140,6 +149,9 @@ const Game = {
     });
   },
   generateEnemy: function () {
+    this.zombieSound = new Audio()
+    this.zombieSound.src = "starter_code/Audio/Zombie-sound.mp3"
+    this.zombieSound.play()
     this.enemies.push(
       (this.enemy = new Enemy(
         this.canvas.width,
@@ -173,6 +185,4 @@ const Game = {
     });
     //this.deadEnemy.move();
   }
-
-
 };

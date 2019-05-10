@@ -12,7 +12,7 @@ class Life {
 
   draw() {
     this.ctx.font = "18px serif"
-    this.ctx.fillStyle = "black"
+    this.ctx.fillStyle = "white"
     this.ctx.fillText("BLOOD", this.x * 0.39, this.y + 13.5, 100)
     this.ctx.fillStyle = "red"
     this.ctx.fillRect(this.x, this.y, this.game.player.life / 10, this.height)
