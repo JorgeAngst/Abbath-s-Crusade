@@ -24,7 +24,7 @@ const Game = {
 
   start: function () {
     this.windSound = new Audio()
-    this.windSound.src = "starter_code/Audio/NFF-wind-gust-2.mp3"
+    this.windSound.src = "starter_code/Audio/Cave-and-Wind.mp3"
     this.windSound.play()
     this.reset();
 

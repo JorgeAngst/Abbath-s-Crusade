@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+  background-color: rgb(15, 108, 184);
+}
 div {
   position:absolute;
   width: 100%;
@@ -6,10 +10,35 @@ div {
 }
 .cover {
   background-image: url("../img/cga_background_winter.png");
+  background-size: cover
 
+}
+h1 {
+  text-align: center;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 6em;
+  font-weight: normal;
+  text-transform: uppercase;
+  
 }
 
 button {
-  padding: 0;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 2em;
+  height: 50px;
+  border: none;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+button:hover {
+    background-color: transparent;
+    color: rgb(87, 84, 84);
+}
+
+#game {
+  display:block;
   margin: 0 auto;
 }
